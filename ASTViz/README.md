@@ -31,7 +31,9 @@ clang -Xclang -ast-dump -fno-diagnostics-color program1.cpp > <path_to_ast_file>
 python3 json_creator.py <path_to_ast_file> <path_to_output_json_file>
 ```
 
-**Note: Depending on the size of AST this might take a while. Once done verify the file using `json_verifier.py`.**
+**Note: *Depending on the size of AST this might take a while.***.
+
+Once step -1 is complete verify the file using `json_verifier.py`.**
 
 ### Step 2: Verifying the JSON file generated
 
@@ -42,7 +44,7 @@ python3 json_verifier.py <path_to_ast_file> <path_to_generated_json_file>
 ```
 ### Step 3: Splitting the JSON file
 
-**Note: If the JSON file contains nodes less than 1800 this step can be skipped.**
+**Note: If the JSON file contains less than 1800 nodes this step can be skipped.**
 
 `json_splitter_mathematical_way.py` is a tool for splitting the generated JSON into smaller chunks of JSON data. It breaks the JSON data with every new JSON containing a maximum of n nodes. This can be achieved using:
 
