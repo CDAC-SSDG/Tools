@@ -91,7 +91,7 @@ Finally the visualization of AST can be viewed using one's browser and visiting 
 
 ## Help
 
-In case of any help is required regarding the usage of ASTViz an issue/disscussion can be raised on the current repository.
+In case of any help is required regarding the usage of ASTViz an [issue/disscussion](https://github.com/CDAC-SSDG/Tools/issues) can be raised on the current repository.
 
 ## Download Links
 
