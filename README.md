@@ -5,5 +5,5 @@ This repository is a one place stop used for releasing the tools and other utili
 
 ## Current releases:
 
-+ [ASTViz](https://github.com/CDAC-SSDG/Tools/tree/main/ASTViz): Set of tools for visulization of Clang AST using graphs on browser window 
++ [ASTViz](https://github.com/CDAC-SSDG/Tools/tree/main/ASTViz): Set of tools for visulization of Clang AST using graphs on browser window. 
 
