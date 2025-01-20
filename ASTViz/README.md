@@ -79,16 +79,17 @@ This will create multiple JSON split files which are stored in `<path_to_output_
 
 ### Step 4: Configuring the server
 
-The JSON files generated in step 3 needs to be copied to path `/var/www/html/visualiser/testing/json_split_output/` inside the `ast_viz_server.sif` container. After that the server can be started using
-
+The JSON files generated in step 3 needs to be copied to path `src/visualiser/testing/json_split_output/` and `src/visualiser/testing/static/json_split_output/`. 
+Navigate to the directory `src/visualiser/testing` 
+Run the following command:
 ```bash
-singularity run ast_viz_server.sif
+go run main.go 7000
 ```
+Replace the port number with any desired port number.
 
 ### Step 5: Visualizing the AST 
-Finally the visualization of AST can be viewed using one's browser and visiting `http://<IP_address_of_machine_with_container_running>:6001`
-
-
+Open your web browser and navigate to http://<IP_address_of_machine>:<port>. Replace <port> with the port number you specified while running the application. 
+For navigating the AST in browser refer the following [document](src/visualizer/README.md)
 ## Help
 
 In case of any help is required regarding the usage of ASTViz an [issue/disscussion](https://github.com/CDAC-SSDG/Tools/issues) can be raised on the current repository.
