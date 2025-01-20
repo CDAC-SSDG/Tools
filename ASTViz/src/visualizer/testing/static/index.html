@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>POST Request Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style type="text/css">
+	.node {
+    cursor: pointer;
+  }
+  .overlay{
+      background-color:#EEE;
+  }
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+  .node text {
+    font-size:10px; 
+    font-family:sans-serif;
+  }
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+  }
+  .templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+  }
+  .ghostCircle.show{
+      display:block;
+  }
+  .ghostCircle, .activeDrag .ghostCircle{
+       display: none;
+  }
+</style>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="dndTree.js"></script>
+
+<body>
+    <div id="response">
+        <select id="fileSelect">
+            <option value="">Select a file</option>
+        </select>
+        <text id="root"></text>  
+        <select id="fileSelectnode">
+            <option value="">Select a file</option>
+        </select>
+        <text id="node"></text>         
+    </div>
+
+    <div id="tree-container"></div> 
+
+    <script>
+        $(document).ready(function () {
+         
+            RootSelection("Trans")
+                
+            });
+
+            const host = "{{.Host}}";
+            const port = "{{.Port}}";
+            console.log(host);
+            console.log(port);
+
+            function NodeSelection(pattern)
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "http://" + host + ":"+ port +"/api/root", // The server endpoint you defined in Go
+                    data: { "nameid": pattern},
+                    success: function (response) {
+                        console.log(response);
+                        $("#node").html(response.listoffiles[0]);
+                        dndTree("json_split_output/"+response.listoffiles[0]+".json")
+                        var selectElement = $("#fileSelectnode");
+                        selectElement.empty();
+                        selectElement.append("<option value=''>Select a file</option>");
+                        $.each(response.listoffiles, function(index, filename) {
+                            selectElement.append("<option value='" + filename + "'>" + filename + "</option>");
+                        });
+                        selectElement.on("change", function () {
+                           var selectedValue = $(this).val();
+                            if (selectedValue) {
+                                console.log("Selected file: " + selectedValue);
+                                $("#node").html(selectedValue);
+                                dndTree("json_split_output/"+selectedValue+".json");
+                                //selectlist(selectedValue);
+                               
+                            }
+                           
+                        });
+                       
+                    },
+                    error: function (error) {
+                        console.error("Error:", error);
+                    },
+                    
+                });
+            }
+    
+
+            function RootSelection(pattern)
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "http://" + host + ":"+ port +"/api/root", // The server endpoint you defined in Go
+                    data: { "nameid": pattern},
+                    success: function (response) {
+                        console.log(response)
+                        $("#root").html(response.listoffiles[0]);
+                        dndTree("json_split_output/"+response.listoffiles[0]+".json")
+                        var selectElement = $("#fileSelect");
+                        selectElement.empty();
+                        selectElement.append("<option value=''>Select a file</option>");
+                        $.each(response.listoffiles, function(index, filename) {
+                            selectElement.append("<option value='" + filename + "'>" + filename + "</option>");
+                        });
+                        selectElement.on("change", function () {
+                           var selectedValue = $(this).val();
+                            if (selectedValue) {
+                                console.log("Selected file: " + selectedValue);
+                                $("#root").html(selectedValue);
+                                dndTree("json_split_output/"+selectedValue+".json");
+                                //selectlist(selectedValue);
+                               
+                            }
+                           
+                        });
+                       
+                    },
+                    error: function (error) {
+                        console.error("Error:", error);
+                    },
+                    
+                });
+            }
+    
+        function selectlist(selectedValue)
+        {
+
+            $.ajax({
+                    type: "POST",
+                    url: "http://" + host + ":"+ port +"/api/node", // The server endpoint you defined in Go
+                    data: { "nameid": selectedValue
+                          },
+                    success: function (response) {
+                        // $("#node").html(selectedValue);
+                        var selectElement = $("#fileSelectnode");
+                        selectElement.empty();
+                        selectElement.append("<option value=''>Select a file</option>");
+                        $.each(response.listoffiles, function(index, filename) {
+                            selectElement.append("<option value='" + filename + "'>" + filename + "</option>");
+                        });
+                        selectElement.on("change", function () {
+                            var selectedValue = $(this).val();
+                            if (selectedValue) {
+                                console.log("Selected file: " + selectedValue);
+                                $("#node").html(selectedValue);
+                                selectlist(selectedValue);
+                            }
+                        });
+                        dndTree("json_split_output/"+response.listoffiles[0]+".json")
+                    },
+                    error: function (error) {
+                        console.error("Error:", error);
+                    }
+                });
+
+        }
+    </script>
+</body>
+</html>

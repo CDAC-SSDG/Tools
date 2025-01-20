@@ -1,0 +1,19 @@
+{
+ "node_name": "TranslationUnitDecl",
+ "node_id": "0x19ca1b78 ",
+ "metadata": "<<invalid sloc>> <invalid sloc>",
+ "child": [
+  {
+   "node_name": "TypedefDecl",
+   "node_id": "0x19ca2a90 ",
+   "metadata": "<<invalid sloc>> <invalid sloc>",
+   "extra_data": " implicit __uint128_t 'unsigned __int128'",
+   "child": {
+    "node_name": "BuiltinType",
+    "node_id": "0x19ca2160 ",
+    "metadata": "NO DATA PRESENT",
+    "extra_data": "'unsigned __int128'"
+   }
+  }
+ ]
+}
