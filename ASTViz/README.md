@@ -19,12 +19,12 @@ These are a set of tools that help in visualization of Clang AST. It showcases t
 ## Sample Looks
 
 Eagle eye view of AST:
-![Screenshot1 for ASTViz](ASTViz-example1.jpg "ASTViz Example 1")
+![Screenshot1 for ASTViz](assets/ASTViz-example1.jpg)
 
 ---
 
 Zoomed in view:
-![Screenshot2 for ASTViz](ASTViz-example2.jpg "ASTViz Example 2")
+![Screenshot2 for ASTViz](assets/ASTViz-example2.jpg)
 
 ---
 
